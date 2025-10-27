@@ -1904,6 +1904,7 @@ GameObject:
   - component: {fileID: 454111554}
   - component: {fileID: 454111558}
   - component: {fileID: 454111557}
+  - component: {fileID: 454111559}
   m_Layer: 0
   m_Name: MainPlayer
   m_TagString: Untagged
@@ -2018,6 +2019,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 0}
   moveSpeed: 0.1
+--- !u!114 &454111559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454111550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c4eab7d1fa24d4fb6932797ba4539d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeformableSphere
+  deformationStrength: 0.5
 --- !u!1 &456733404
 GameObject:
   m_ObjectHideFlags: 0
@@ -2609,6 +2623,7 @@ GameObject:
   - component: {fileID: 728793640}
   - component: {fileID: 728793639}
   - component: {fileID: 728793641}
+  - component: {fileID: 728793642}
   m_Layer: 0
   m_Name: NotMainPlayer
   m_TagString: Untagged
@@ -2694,11 +2709,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 728793634}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 833a44f5ec18c8a46b47ea94dd98957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainPlayer: {fileID: 0}
+--- !u!114 &728793642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728793634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11b3703afc9416548be96dd10c5fb41c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NotMainPlayerMove2
+  mainPlayerMoveRef: {fileID: 454111558}
   mainPlayer: {fileID: 0}
 --- !u!1 &746493637
 GameObject:
@@ -4465,7 +4494,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1437729808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4880,6 +4909,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1642086385}
   - component: {fileID: 1642086386}
+  - component: {fileID: 1642086387}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -4911,7 +4941,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642086384}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bb1660acc3d4314196ae5bfed7aa8d5, type: 3}
   m_Name: 
@@ -4927,6 +4957,28 @@ MonoBehaviour:
   yPixel: 0
   imgRect: {fileID: 290200051}
   isDebug: 0
+--- !u!114 &1642086387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642086384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21e0127a00f98704da4a998fec6658ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GazeDeformManager
+  deformableMesh: {fileID: 454111559}
+  mainPlayerMove: {fileID: 454111558}
+  notMainPlayerMove: {fileID: 728793641}
+  useMouseInput: 1
+  trackingReceiver: {fileID: 0}
+  recordingSurfaceTag: MainPlane
+  avoidSurfaceTag: NotMainPlane
+  pixelDistance: 200
+  onePixelDistance: 20
+  imgRect: {fileID: 0}
 --- !u!1 &1753337877
 GameObject:
   m_ObjectHideFlags: 0

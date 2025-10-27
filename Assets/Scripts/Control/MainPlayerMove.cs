@@ -8,15 +8,15 @@ public class MainPlayerMove : MonoBehaviour
     public NavMeshAgent navMeshAgent;
 
     private Vector3 desiredVelocity;
-    private Vector3 smoothPositionRef; // Ìí¼ÓÎ»ÖÃÆ½»¬²Î¿¼Öµ
+    private Vector3 smoothPositionRef; // ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Æ½ï¿½ï¿½ï¿½Î¿ï¿½Öµ
 
-    [Header("Ð¡ÇòËÙ¶È")]
+    [Header("Ð¡ï¿½ï¿½ï¿½Ù¶ï¿½")]
     public float moveSpeed = 0.1f;
-    public void OnSetData()
+    void Start()
     {
         navMeshAgent = this.GetComponent<NavMeshAgent>();
 
-        // ¹Ø±Õ×Ô¶¯ËÙ¶È¿ØÖÆ
+        // ï¿½Ø±ï¿½ï¿½Ô¶ï¿½ï¿½Ù¶È¿ï¿½ï¿½ï¿½
         navMeshAgent.updatePosition = false;
         navMeshAgent.updateRotation = false;
     }
@@ -37,38 +37,38 @@ public class MainPlayerMove : MonoBehaviour
     void isMoveSucc(Vector3 vector3, bool isUpdateMove)
     {
 
-        // Ã¿Ö¡ÉèÖÃÄ¿±êÈÃNavMesh¼ÆËã±ÜÕÏ 
+        // Ã¿Ö¡ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½NavMeshï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
         navMeshAgent.nextPosition = transform.position;
         navMeshAgent.destination = vector3;
-        // »ñÈ¡NavMesh¼ÆËã³öµÄ±ÜÕÏ·½Ïò
+        // ï¿½ï¿½È¡NavMeshï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½Ï·ï¿½ï¿½ï¿½
         if (navMeshAgent.hasPath)
         {
             desiredVelocity = navMeshAgent.desiredVelocity;
         }
         else
         {
-            // Ã»ÓÐÂ·¾¶Ê±Ö±½Ó³¯ÏòÄ¿±ê
+            // Ã»ï¿½ï¿½Â·ï¿½ï¿½Ê±Ö±ï¿½Ó³ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
             desiredVelocity = (vector3 - transform.position).normalized * navMeshAgent.speed;
         }
 
-        // ÊÖ¶¯Ó¦ÓÃÒÆ¶¯£¨±ÜÃâNavMeshµÄÂ·¾¶²éÕÒ¸ÉÈÅ£©
+        // ï¿½Ö¶ï¿½Ó¦ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½NavMeshï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½Ò¸ï¿½ï¿½Å£ï¿½
         ApplyManualMovement(vector3, isUpdateMove);
     }
     void ApplyManualMovement(Vector3 vector3, bool isUpdateMove)
     {
-        // Ê¹ÓÃNavMesh¼ÆËãµÄ±ÜÕÏ·½Ïò£¬µ«ÊÖ¶¯¿ØÖÆÒÆ¶¯
+        // Ê¹ï¿½ï¿½NavMeshï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½Ï·ï¿½ï¿½ò£¬µï¿½ï¿½Ö¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
         if (desiredVelocity.magnitude > 0.1f)
         {
             Vector3 newPosition = transform.position + desiredVelocity * Time.deltaTime;
-            // È·±£ÐÂÎ»ÖÃÔÚNavMeshÉÏ
+            // È·ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½NavMeshï¿½ï¿½
             if (NavMesh.SamplePosition(newPosition, out NavMeshHit hit, 1.0f, NavMesh.AllAreas))
             {
-                // Æ½»¬ÒÆ¶¯µ½Ä¿±êÎ»ÖÃ
+                // Æ½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Î»ï¿½ï¿½
                 transform.position = Vector3.SmoothDamp(transform.position, hit.position, ref smoothPositionRef, moveSpeed);
 
                 navMeshAgent.nextPosition = transform.position;
             }
-            // Ðý×ª³¯ÏòÒÆ¶¯·½Ïò
+            // ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½
             if (desiredVelocity.magnitude > 0.5f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(desiredVelocity);

@@ -3,18 +3,18 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    [Header("Ö÷Íæ¼Ò")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public MainPlayerMove mainPlayerMove;
-    [Header("´ÓÍæ¼Ò")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public NotMainPlayerMove notMainPlayerMove;
 
-    [Header("ÏñËØ¹Ì¶¨¾àÀëÖµ")]
+    [Header("ï¿½ï¿½ï¿½Ø¹Ì¶ï¿½ï¿½ï¿½ï¿½ï¿½Öµ")]
     public float pixelDistance = 10f;
-    [Header("ÏñËØµ¥¸ö²½³¤")]
+    [Header("ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public float onePixelDistance = 1.0f;
     // Start is called before the first frame update
 
-    [Header("TrueÊó±êFalseÑÛ¾¦")]
+    [Header("Trueï¿½ï¿½ï¿½Falseï¿½Û¾ï¿½")]
     public bool isTestInput = true;
 
     public EyeTrackingReceiver trackingReceiver;
@@ -23,7 +23,7 @@ public class PlayerManager : MonoBehaviour
     public float xPixel = 0;
     public float yPixel = 0;
     /// <summary>
-    /// Ëæ»úÌÓ±Ü
+    /// ï¿½ï¿½ï¿½ï¿½Ó±ï¿½
     /// </summary>
     private List<Vector2> vector2s = new List<Vector2>(4);
 
@@ -37,8 +37,8 @@ public class PlayerManager : MonoBehaviour
         xPixel = Screen.width;
         yPixel = Screen.height;
 
-        mainPlayerMove.OnSetData();
-        notMainPlayerMove.OnSetData(mainPlayerMove);
+        //mainPlayerMove.OnSetData();
+        //notMainPlayerMove.OnSetData(mainPlayerMove);
 
     }
     // Update is called once per frame
@@ -60,13 +60,13 @@ public class PlayerManager : MonoBehaviour
     {
         imgRect.anchoredPosition = vector2;
         Vector3 _vector3 = Tools.OnBackNotMainPlayerPos(notMainPlayerMove.transform.position);
-        //1.¼ÆËãÖ÷½ÇºÍ·ÇÖ÷½ÇµÄÆÁÄ»×ø±ê²î¾à
+        //1.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÇºÍ·ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Vector2 mainVec2 = Camera.main.WorldToScreenPoint(_vector3);
-        //Debug.Log(mainVec2 + " ·ÇÖ÷½ÇÏñËØµã£¡");
-        //Debug.Log(vector2 + " ´«ÈëÏñËØµã£¡");
+        //Debug.Log(mainVec2 + " ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµã£¡");
+        //Debug.Log(vector2 + " ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµã£¡");
         float _distance = Vector2.Distance(mainVec2, vector2);
-        //Debug.Log(_distance+" µ±Ç°ÏñËØ¾àÀë£¿");
-        //2.²î¾àÐ¡ÓÚ¹Ì¶¨Öµ£¬¿ªÊ¼ÒÔ¹Ì¶¨ÏñËØÒÆ¶¯
+        //Debug.Log(_distance+" ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½ë£¿");
+        //2.ï¿½ï¿½ï¿½Ð¡ï¿½Ú¹Ì¶ï¿½Öµï¿½ï¿½ï¿½ï¿½Ê¼ï¿½Ô¹Ì¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
         if (_distance <= pixelDistance)
         {
             bool hasMoved = false;
@@ -74,8 +74,8 @@ public class PlayerManager : MonoBehaviour
             {
                 hasMoved = true;
             }
-            //·½ÏòÉÁ¶ãList
-            // Èç¹ûÖ±½ÓÒÆ¶¯Ê§°Ü£¬³¢ÊÔËÄ¸ö·½Ïò
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½List
+            // ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½Æ¶ï¿½Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½
             if (!hasMoved)
             {
                 Debug.Log(mainVec2);
@@ -86,16 +86,16 @@ public class PlayerManager : MonoBehaviour
                     if (OnMoveSucc(vector2s[i], mainVec2, pixelDistance * 2))
                     {
                         hasMoved = true;
-                        break;  // ÕÒµ½Ò»¸ö¿ÉÐÐ·½Ïò¾ÍÍ£Ö¹
+                        break;  // ï¿½Òµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½ï¿½Í£Ö¹
                     }
                 }
                 if (hasMoved)
                 {
-                    Debug.LogError("ÕÒµ½ÁË£¡£¡£¡");
+                    Debug.LogError("ï¿½Òµï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ï¿½");
                 }
                 else
                 {
-                    Debug.LogError("Ã»ÓÐÕÒµ½&&&&&&&&&&&&&&");
+                    Debug.LogError("Ã»ï¿½ï¿½ï¿½Òµï¿½&&&&&&&&&&&&&&");
                 }
                 vector2s.Clear();
             }
@@ -103,13 +103,13 @@ public class PlayerManager : MonoBehaviour
     }
     private bool OnMoveSucc(Vector2 vector2,Vector2 mainVec2,float moveDis) 
     {
-        //ÑÓÉêµÄÏñËØµã
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½
         Vector2 extendVec2 = Tools.FindPointOnExtension(vector2, mainVec2, moveDis);
-        //Debug.Log(extendVec2 + " ÑÓ³¤Ö®ºóµÄÏñËØ×ø±ê");
-        //3.¼ÆËãÅö×²NotMainPlayerµÄ×ø±êÖµ
+        //Debug.Log(extendVec2 + " ï¿½Ó³ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+        //3.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²NotMainPlayerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
         Vector3 vector3 = Vector3.zero;
         GameObject go = null;
-        //»ñÈ¡Åö×²µÄÎ»ÖÃºÍÅö×²µÄÎïÌå
+        //ï¿½ï¿½È¡ï¿½ï¿½×²ï¿½ï¿½Î»ï¿½Ãºï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Tools.OnBackHitPointAndGameObject(extendVec2, ref vector3, ref go, "NotMainPlane");
         Vector3 vector31 = Vector3.zero;
         GameObject go1 = null;
@@ -118,15 +118,15 @@ public class PlayerManager : MonoBehaviour
         {
             return false;
         }
-        //4.Î»ÖÃ×ª»¯ÎªÆ½Ãæ×ø±êÏµ
+        //4.Î»ï¿½ï¿½×ªï¿½ï¿½ÎªÆ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµ
         if (go1 == null)
         {
-            //Debug.LogError("µã»÷Î»ÖÃÒì³££¡");
+            //Debug.LogError("ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ì³£ï¿½ï¿½");
             return false;
         }
-        //µã»÷Î»ÖÃ
+        //ï¿½ï¿½ï¿½Î»ï¿½ï¿½
         string xiangXian1 = go1.name;
-        //ÑÓÉêÎ»ÖÃ
+        //ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
         string xiangXian2 = go.name;
         bool isMove = false;
         if (string.Equals(xiangXian1, "center") || string.Equals(xiangXian2, "center"))
@@ -134,7 +134,7 @@ public class PlayerManager : MonoBehaviour
         }
         else if (!string.Equals(xiangXian1, xiangXian2))
         {
-            //ÔÚÁÙ±ß¿ç½çÊ± Ö´ÐÐË²ÒÆ
+            //ï¿½ï¿½ï¿½Ù±ß¿ï¿½ï¿½Ê± Ö´ï¿½ï¿½Ë²ï¿½ï¿½
             isMove = true;
         }
         else
